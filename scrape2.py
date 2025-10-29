@@ -15,6 +15,8 @@ def get_book_bs4(url):
         print(f"正在請求: {url}")
         response = requests.get(url, timeout=10)
         response.raise_for_status() #檢查HTTP狀態碼
+        #解決價格印出亂碼問題
+        response.encoding = 'utf-8'
         
         #建立Soup物件
         soup = BeautifulSoup(response.text, 'lxml')
@@ -68,4 +70,5 @@ def get_book_bs4(url):
         print(f"發生一般性錯誤: {e}")
 
 if __name__ == "__main__":
+
     get_book_bs4(URL)
